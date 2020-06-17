@@ -24,4 +24,6 @@
 
    - find
     Retorna o primeiro elemento que satisfaz a condição passada por parâmetro.
-   - sort 
+   - sort
+    Retorna um array ordenado segundo uma regra passada pela função passada como parâmetro.
+

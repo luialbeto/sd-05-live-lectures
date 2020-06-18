@@ -34,3 +34,5 @@
   - conseguimos abreviar, chaves/valor dentro de objetos
 
 ## Default Params
+
+  - definimos valores para os parâmetros, caso não sejam passados

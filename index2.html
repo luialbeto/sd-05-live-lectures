@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <title>Aula 9.2</title>
+  </head>
+
+  <body>
+    <ul></ul>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous">
+    </script>
+    <script>
+      const appendJoke = (joke) => {
+        let ul = document.querySelector('ul');
+        let li = document.createElement('li');
+        li.innerHTML = joke;
+        ul.appendChild(li);
+      }
+
+      //  ghost
+
+      $.getJSON(
+        'https://icanhazdadjoke.com/search?term=work',
+        data => {
+          appendJoke(data.results[0].joke)
+          $.getJSON('https://icanhazdadjoke.com/search?term=ghost',
+            data => {
+              appendJoke(data.results[0].joke)
+                $.getJSON('https://icanhazdadjoke.com/search?term=pizza',
+                data => {
+                  appendJoke(data.results[0].joke)
+                  $.getJSON(
+                    'https://icanhazdadjoke.com/search?term=wolf',
+                    data => {
+                      appendJoke(data.results[0].joke)
+                      $.getJSON(
+                        'https://icanhazdadjoke.com/search?term=ant',
+                        data => appendJoke(data.results[0].joke)
+                      );
+                    }
+                  )
+                }
+              )
+            }
+          )
+        }
+      )
+
+    </script>
+
+  </body>
+</html>

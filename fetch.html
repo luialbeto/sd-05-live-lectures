@@ -1,0 +1,19 @@
+<head>
+  <!-- Esse arquivo foi feito no HTML pra lembrar que o fetch funciona dentro do navegador! -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Live Lecture 9.3</title>
+  <script>
+    const API_URL = 'https://icanhazdadjoke.com/';
+    const myObject = {
+      method: 'GET',
+      headers: { 'Accept': 'application/json' }
+    };
+    fetch(API_URL, myObject)
+      .then(response => response.json())
+      .then(data => console.log(data.joke))
+  </script>
+</head>
+<body>
+</body>

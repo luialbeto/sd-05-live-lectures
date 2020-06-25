@@ -1,0 +1,102 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Live Lecture 9.3</title>
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous">
+  </script>
+  <script>
+    const appendJoke = (joke) => {
+      let ul = document.querySelector("ul")
+      let li = document.createElement("li");
+      li.innerHTML = joke;
+      ul.appendChild(li);
+    }
+
+    const getRandomJoke = (term, callback) => {
+      return new Promise((resolve, reject) => {
+        if (term == "ant") reject('That joke was too good to be here!') 
+        else {
+          $.getJSON(`https://icanhazdadjoke.com/search?term=${term}`,
+          (data) => {
+            appendJoke(data.results[0].joke);
+            resolve()
+          },
+          reject
+          )
+        }
+      })
+
+      // $.getJSON(`https://icanhazdadjoke.com/search?term=${term}`,
+      // function(data) {
+      //   appendJoke(data.results[0].joke);
+      //   callback ? callback() : undefined
+      // }
+      // )
+    }
+
+    async function getJokes () {
+      try {
+        await getRandomJoke("ghost")
+        await getRandomJoke("pizza")
+        await getRandomJoke("wolf")
+        await getRandomJoke("ant")
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    getJokes();
+
+    // getRandomJoke("spider")
+    //   .then(() => getRandomJoke("ghost"))
+    //   .then(() => getRandomJoke("pizza"))
+    //   .then(() => getRandomJoke("ant"))
+    //   .then(() => getRandomJoke("wolf"))
+    //   .catch(error => console.log(error))
+
+    // getRandomJoke("spider",
+    //   getRandomJoke("ghost",
+    //     getRandomJoke("pizza",
+    //       getRandomJoke("wolf",
+    //         getRandomJoke("ant")
+    //       )
+    //     )
+    //   )
+    // )
+
+    //   $.getJSON("https://icanhazdadjoke.com/search?term=spider",
+    //   function(data) {
+    //     appendJoke(data.results[0].joke)
+    //     $.getJSON(
+    //       "https://icanhazdadjoke.com/search?term=ghost",
+    //       function(data) {
+    //         appendJoke(data.results[0].joke)
+    //         $.getJSON(
+    //           "https://icanhazdadjoke.com/search?term=pizza",
+    //           function(data) {
+    //             appendJoke(data.results[0].joke)
+    //             $.getJSON(
+    //               "https://icanhazdadjoke.com/search?term=wolf",
+    //               function(data) {
+    //                 appendJoke(data.results[0].joke)
+    //                 getRandomJoke('ant');
+    //               }
+    //             )
+    //           }
+    //         )
+    //       },
+    //     )
+    //   }
+    // )
+  </script>
+</head>
+<body>
+  <ul>
+  </ul>
+</body>
+</html>

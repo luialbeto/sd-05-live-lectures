@@ -13,6 +13,9 @@
 ## React Router
 
   - Rotas(Estáticas e Dinâmicas)
+    Estáticas - Levam componente sem variar conforme o caminho específicado.
+
+    Dinâmicas - Variam conforme um parâmetro passado via o endereço. Ex: `solutionId` da aula de hoje.
 
   - BrowserRouter
     Envelopa o conteúdo do `react-router-dom`.

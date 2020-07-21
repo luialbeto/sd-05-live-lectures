@@ -20,7 +20,7 @@ function Content() {
         <Route path='/schedule' component={Schedule} />
         <Route path='/setup' component={Setup} />
 
-        {/* Exemplo com props.children do Staroscky abaixo, acessem com localhost:3000/HELLO */}
+        {/* Exemplo com props.children do Staroscky e do Lucas abaixo, acessem com localhost:3000/HELLO */}
         <Route to="/HELLO" >
           OI
         </Route>

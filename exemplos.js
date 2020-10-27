@@ -362,7 +362,7 @@ db.voos.updateMany(
 //use esercicios
 
 db.movies.updateOne(
-  { title: "Batman: O retorno do coringa" },
+  { title: "Batman" },
   {
     $push: {
       category: "superhero"

@@ -1,0 +1,17 @@
+{
+  "name": "exercicio",
+  "version": "1.0.0",
+  "description": "Meu primeiro script NodeJS",
+  "main": "./src/index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "meu-script": "USER=tal SENHA=senha node ./src/index.js"
+  },
+  "author": "Turma 5 <turma5@trybe.com>",
+  "license": "ISC",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  },
+  "devDependencies": {}
+}

@@ -1,16 +1,22 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+
+const UserModel = require('./models/User');
+const userController = require('./controllers/userController');
+const databaseConnection = require('./models/connection');
 
 const app = express();
 
-const SERVER_ENV = process.env.SERVER_ENV || 'Não achei';
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-	res.send(`Rodando em:${SERVER_ENV}`);
-});
+const db = databaseConnection;
+const userFactory = UserModel.factory(db, [ 'admin', 'user' ]);
+
+app.post('/users', userController.createUser(userFactory));
 
 const PORT = process.env.PORT || 3000;
 
-//50811
 app.listen(PORT, () => {
-	console.log(`Escutando aqui ${PORT}`);
+	console.log(`Tô por aqui --> ${PORT}`);
 });

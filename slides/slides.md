@@ -2,163 +2,115 @@
 presentation:
   width: 1920
   height: 1080
-  previewLinks: true
   theme: black.css
+  previewLinks: true
 ---
 
 <!-- slide -->
 
-# 30.1 - Deploy com Heroku
-
-<!-- slide vertical=true -->
-
-## Tipos de hospedagem
-
-<!-- slide vertical=true -->
-
-![](https://raw.githubusercontent.com/betrybe/live-lectures/master/block-29/29-1/images/saas-vs-paas-vs-iaas-1024x953.png?token=AJCZOMT3J5L234YKIRIZQQS726OYE)
-
-<!-- slide vertical=true -->
-
-### On-Premises
-
-É necessário gerenaciar todas as camadas
-
-<!-- slide vertical=true -->
-
-### Infrastucture as a Service
-
-O provedor disponibiliza serviços voltados para infraestrutura como, por
-exemplo, backup, redes e VMs.
-
-<!-- slide vertical=true -->
-
-### Platform as a Service
-
-Plataforma para desenvolvimento e gerenciamento de aplicativos na nuvem
-
-<!-- slide vertical=true -->
-
-### Softwares as a Service
-
-Utiliza-se uma aplicação já pronta. Ex.: Office 365, Google Docs, GitHub.
-
-<!-- slide vertical=true -->
-
-# [🏁 Checkpoint 🏁](https://wall.sli.do/event/tx1ckssb)
+# 31.1 - S.O.L.I.D
 
 <!-- slide -->
 
-## Realizando o deploy
+## O que é?
 
-<small>Bora pro VSCode 🧑‍💻</small>
+<br>
+
+Conjunto de boas práticas, que ditam como seu código deve ser escrito e como ele deve ser organizado
 
 <!-- slide -->
 
-## Variáveis de ambiente
+## Vantagens
 
-<!-- slide vertical=true -->
-
-### Cada servidor é um ambiente
-
-Cada ambiente tem suas próprias variáveis de ambiente. Dessa forma, cada
-ambiente pode acessar, por exemplo, um banco de dados diferente.
-
-<!-- slide vertical=true -->
-
-### Definindo variáveis
-
-<!-- slide vertical=true -->
-
-#### No terminal
-
-```shell
-export DB_URI=mongodb://localhost:27017/meu-site
-
-# OU
-
-DB_URI=mongodb://localhost:27017/meu-site npm start
-```
-
+- Facilita a manutenção do código (Escalabilidade);
+- Facilita a escrita de testes;
+- Melhora a legibilidade e a navegação;
+- Evita trechos de código muito complexos ou duplicados.
 <br>
-
-#### Com dot-env
-
-```shell
-# .env
-
-DB_URI=mongodb://localhost:27017/meu-site
-```
-
-```js
-// index.js
-
-require('dot-env/config');
-//...
-```
-
-<br>
-
-#### No Heroku
-
-```shell
-heroku config:set "MONGODB_URI=mongodb://user:password@cloud.mongodb.com/meu-site" --app meu-site
-
-heroku config:set "MONGODB_URI=mongodb://user:password@cloud.mongodb.com/meu-site-homolog" --app meu-site-beta
-```
+>"Escrever código complexo é uma tarefa simples, mas escrever código simples é uma tarefa muito complexa"
+>Desconhecido
 
 <!-- slide vertical=true -->
 
-### Utilizando variáveis
+## O que veremos hoje ?
 
-<!-- slide vertical=true -->
+- Single Responsability
+- Open closed principle
+- Dependency Inversion Principle
 
-#### `process.env`
+<!-- slide horizontal=false-->
 
-<br>
-
-```javascript
-// ...
-MongoClient.connect(process.env.DB_URI);
-// ...
-```
-
-<!-- slide vertical=true -->
-
-# [🏁 Checkpoint 🏁](https://wall.sli.do/event/tx1ckssb)
-
-<!-- slide -->
-
-## Múltiplos ambientes
+## Single Responsability
 
 <!-- slide vertical=true -->
 
 ### Vantagens
 
-<br>
-
-- Realização de mais de um deploy a partir do mesmo código\
-- Cada deploy é um ambiente isolado
-- Variáveis de ambiente isoladas
-- URLs de acesso diferentes
-- Versões diferentes da aplicação
+- Diminuir a complexidade do código
+  (Complexidade cognitiva)
+- Facilitar a escrita de testes
 
 <!-- slide vertical=true -->
 
-### Visualizando
+### Hora da Demo! 💻
 
-![](images/multiple-environments.png)
-
-<!-- slide vertical=true -->
-
-# [🏁 Checkpoint 🏁](https://wall.sli.do/event/tx1ckssb)
+Show me the code!
 
 <!-- slide vertical=true -->
 
-### Agora, a prática
-
-De volta ao VSCode 😄
+### [🏁 Checkpoint 🏁](https://wall.sli.do/event/jtuly8dh?section=d842a415-e537-4b4d-88ef-16be0b704bbd)
 
 <!-- slide -->
 
-# [🤔 Dúvidas? 🤔](https://wall.sli.do/event/tx1ckssb)
+## Open Closed Principle
+
+<!-- slide vertical=true -->
+
+### Vantagens
+
+- Escalabilidade / Estender o funcionamento
+- Evitar mudança de função / Quebrar o código
+
+<!-- slide vertical=true -->
+
+### Hora da Demo! 💻
+
+Show me the code!
+
+<!-- slide vertical=true -->
+
+### [🏁 Checkpoint 🏁](https://wall.sli.do/event/jtuly8dh?section=d842a415-e537-4b4d-88ef-16be0b704bbd)
+
+<!-- slide -->
+
+## Dependency Inversion Principle
+
+<!-- slide vertical=true -->
+
+### Vantagens
+
+- Reultilização de código
+- Mudança de contexto facilitada
+- Função não precisa conheçer quem é a dependencia
+
+<br>
+
+> Fornecer a função tudo que ela precisa para trabalhar.
+
+<!-- slide vertical=true -->
+
+### Hora da demo
+
+E lá vamos nós! 🧹
+
+<!-- slide vertical=true -->
+
+### [🏁 Checkpoint 🏁](https://wall.sli.do/event/jtuly8dh?section=d842a415-e537-4b4d-88ef-16be0b704bbd)
+
+<!-- slide -->
+
+# [🤔 Dúvidas? 🤔](https://wall.sli.do/event/tx1ckssb?section=b9260842-edd0-4aba-977b-32dfeadc0aeb)
+
+<!-- slide -->
+
+# Fim!

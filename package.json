@@ -4,7 +4,7 @@
   "description": "Este repositório armazena os códigos e scripts fornecidos durante as palestras ao vivo pelos especialistas da Trybe.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,6 +20,7 @@
   "homepage": "https://github.com/tryber/sd-05-live-lectures#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "pm2": "^4.5.0"
+    "mysql2": "^2.2.5",
+    "nodemon": "^2.0.7"
   }
 }

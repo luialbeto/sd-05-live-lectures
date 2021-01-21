@@ -1,11 +1,11 @@
 const express = require('express');
-const { Product } = require('../models');
+const { Product, User } = require('../models');
 const router = express.Router();
 
 router.post('/', (req, res) => {
-	const { name, description, price } = req.body;
+	const { name, description, price, userId } = req.body;
 
-	Product.create({ name, description, price })
+	Product.create({ name, description, price, userId })
 		.then((newProduct) => {
 			res.status(200).json(newProduct);
 		})
@@ -27,7 +27,10 @@ router.get('/', (req, res, next) => {
 });
 // GET /product/1
 router.get('/:id', (req, res, next) => {
-	Product.findByPk(req.params.id)
+	Product.findByPk(req.params.id, {
+		include: { model: User, as: 'user', attributes: { exclude: [ 'password' ] } },
+		attributes: { exclude: [ 'userId', 'id', 'createdAt', 'updatedAt' ] }
+	})
 		.then((product) => {
 			if (product === null) {
 				res.status(404).send({ message: 'Produto não encontrado' });
@@ -57,10 +60,10 @@ router.delete('/:id', (req, res) => {
 });
 // PUT /product/1
 router.put('/:id', (req, res) => {
-	const { name, description } = req.body;
+	const { name, description, price, userId } = req.body;
 
 	Product.update(
-		{ name, description },
+		{ name, description, price, userId },
 		{
 			where: {
 				id: req.params.id

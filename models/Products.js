@@ -5,6 +5,11 @@ const Product = (sequelize, DataTypes) => {
 		price: DataTypes.FLOAT
 	});
 
+	Product.associate = (models) => {
+		//belogns to  = pertence a
+		Product.belongsTo(models.User, { as: 'user', foreignKey: 'userId' });
+	};
+
 	return Product;
 };
 

@@ -1,16 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mysql = require('mysql2/promise');
 
-const controller = require('./controllers');
+const catController = require('./controllers/catController');
 
 const app = express();
 
-app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/products/', controller.product);
-app.use('/users/', controller.user);
+app.set('view engine', 'ejs');
+app.set('views', './views');
 
-app.listen(3000, () => {
-	console.log('App ouvindo a porta 3000!');
+app.get('/cats', catController.listCats);
+
+app.listen(3001, () => {
+	console.log('Ouvindo a porta 3001!');
 });

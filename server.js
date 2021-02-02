@@ -1,44 +1,41 @@
-const net = require('net');
-const port = 2708;
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
-const sockets = [];
-let usuarioId = 0;
-
-const server = net.createServer((socket) => {
-	usuarioId++;
-
-	socket.guest = 'Usuario' + usuarioId;
-	sockets.push(socket);
-	socket.write('Bem vindo ao chat!');
-
-	disparo(socket.guest, socket.guest + 'Entrou no Chat.');
-
-	socket.on('end', () => {
-		sockets.splice(sockets.indexOf(socket), 1);
-		const message = socket.guest + ' deixou o chat\n';
-
-		disparo(socket.guest, message);
-	});
-
-	socket.on('data', (data) => {
-		const message = socket.guest + '> ' + data.toString();
-
-		disparo(socket.guest, message);
-	});
-
-	socket.on('error', (error) => {
-		console.log('Erro no socket: ', error.message);
-	});
+const socketIoServer = require('http').createServer();
+const io = require('socket.io')(socketIoServer, {
+	cors: {
+		origin: 'http://localhost:3000',
+		methods: [ 'GET', 'POST' ]
+	}
 });
 
-const disparo = (from, message) => {
-	sockets.forEach((socket, index, array) => {
-		if (socket.guest === from) return;
+const app = express();
 
-		socket.write(message);
-	});
-};
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cors());
 
-server.listen(port, () => {
-	console.log('O webchat está funfando!');
+app.get('/', (req, res) => {
+	res.sendFile(__dirname + '/client.html');
 });
+
+app.post('/notify', (req, res) => {
+	const { title, message } = req.body;
+
+	if (!title || !message) {
+		return res.status(422).json({ message: 'Missing title or message' });
+	}
+
+	io.emit('notification', { title, message });
+
+	res.status(200).json({ message: 'Notification emitted' });
+});
+
+app.get('/ping', (_, res) => {
+	res.status(200).json({ message: 'pong!' });
+});
+
+app.listen(3000, () => console.log('Express: rodando na porta 3000...'));
+
+socketIoServer.listen(4555, () => console.log('Socket.io: ouvindo na porta 4555'));

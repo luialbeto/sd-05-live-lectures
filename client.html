@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="http://localhost:4555/socket.io/socket.io.js"></script>
+    </head>
+    <body>
+        <h1>Painel de notificaoes</h1>
+        <ul id="notificacoes"></ul>
+        <script>
+            const socket = io('http://localhost:4555')
+
+            socket.on('notification', (data) => {
+                const li = document.createElement('li')
+                // document.getElementById('mensagem').innerHTML = data
+                li.textContent = `${data.title}: ${data.message}`
+                document.getElementById('notificacoes').appendChild(li)
+            })
+        </script>
+    </body>
+</html>
